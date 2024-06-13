@@ -1,14 +1,16 @@
 package interfaz;
 
+import impl.Ciudad2NumeroDinamico;
+
 public interface TpoTDA {
 
-    void listarProvincias();
+    String listarProvincias();
 
-    void listarCiudades();
+    String listarCiudades();
 
-    void cargarCiudades();
+    void cargarCiudad(String ciudad, String provincia);
 
-    void eliminarCiudades();
+    void eliminarCiudad(String ciudad);
 
     void listarCiudadesVecinas();
 
