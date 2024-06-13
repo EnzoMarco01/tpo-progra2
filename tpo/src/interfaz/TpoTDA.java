@@ -12,6 +12,8 @@ public interface TpoTDA {
 
     void eliminarCiudad(String ciudad);
 
+    void crearRuta(String ciudadOrigen, String ciudadDestino, int km);
+
     void listarCiudadesVecinas();
 
     void listarCiudadesPuente();

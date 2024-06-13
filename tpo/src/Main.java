@@ -63,6 +63,9 @@ public class Main {
 
         //eliminar OK
         tpo.eliminarCiudad("tandil");
-        System.out.println(tpo.listarCiudades() + "(tandil eliminado)");
+        System.out.println(tpo.listarCiudades() + "(tandil eliminado)\n");
+
+        //agregar ruta
+        tpo.crearRuta("CABA", "mar del plata", 500);
     }
 }

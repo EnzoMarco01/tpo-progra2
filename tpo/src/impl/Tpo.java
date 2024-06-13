@@ -24,6 +24,22 @@ public class Tpo implements TpoTDA {
         c2n.eliminarCiudad(ciudad);
     }
 
+    public void crearRuta(String ciudadOrigen, String ciudadDestino, int km) {
+        grafito.agregarArista(c2n.ciudad2Numero(ciudadOrigen), c2n.ciudad2Numero(ciudadDestino), km);
+        System.out.println(
+                "Existe una ruta entre "
+                + ciudadOrigen
+                + " y "
+                + ciudadDestino
+                + ": "
+                + grafito.existeArista(c2n.ciudad2Numero(ciudadOrigen), c2n.ciudad2Numero(ciudadDestino))
+                + "\nEsta ruta tiene "
+                + grafito.pesoArista(c2n.ciudad2Numero(ciudadOrigen), c2n.ciudad2Numero(ciudadDestino))
+                +"KM."
+        );
+
+    }
+
     public void listarCiudadesVecinas() {
 
     }
