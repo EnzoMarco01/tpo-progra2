@@ -44,6 +44,7 @@ public class Main {
         System.out.println(" - CABA:" + c2n.ciudad2Numero("CABA"));
 
         System.out.println("existe la arista? " + grafito.existeArista(c2n.ciudad2Numero("la plata"),c2n.ciudad2Numero("CABA")));
+        System.out.println("existe la arista opuesta? " + grafito.existeArista(c2n.ciudad2Numero("CABA"),c2n.ciudad2Numero("la plata")));
 
         System.out.println("peso de la arista: " +grafito.pesoArista(c2n.ciudad2Numero("la plata"), c2n.ciudad2Numero("CABA")));
 
