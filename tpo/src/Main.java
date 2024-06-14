@@ -68,10 +68,12 @@ public class Main {
 
         //agregar ruta OK (borrar sout dentro del metodo)
         tpo.crearRuta("CABA", "mar del plata", 500);
+        tpo.crearRuta("mar del plata", "CABA", 500);
 
         //listar ciudades vecinas a X OK
         System.out.println(tpo.listarCiudadesVecinas("CABA"));
 
-        //listar ciudades fuertemente conectadas
+        //listar ciudades fuertemente conectadas OK
+        System.out.println(tpo.listarCiudadesFuertementeConectadas());
     }
 }

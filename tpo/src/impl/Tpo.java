@@ -130,14 +130,25 @@ public class Tpo implements TpoTDA {
     public String listarCiudadesFuertementeConectadas() {
     //Las ciudades fuertemente conectadas son las que tienen rutas de ida y vueltaentre ellas.
         String listaCiudades = "Listado de ciudades fuertemente conectadas: \n";
-        NodoCiudadNumero nodoAux = nodo;
+        NodoCiudadNumero nodoAux1 = nodo;
+        NodoCiudadNumero nodoAux2 = nodo;
 
-        while (nodoAux.sig != null){
-            if (grafito.existeArista(this.ciudad2Numero(nodoAux.ciudad), this.ciudad2Numero(nodoAux.ciudad))
-                    && !nodoAux.ciudad.equals(nodoAux.ciudad)) {
-                listaCiudades += (" -" + nodoAux.ciudad + "\n");
+        while (nodoAux1.sig != null){
+            while (nodoAux2.sig != null) {
+                if (!nodoAux1.ciudad.equals(nodoAux2.ciudad)
+                        && grafito.existeArista(this.ciudad2Numero(nodoAux1.ciudad), this.ciudad2Numero(nodoAux2.ciudad))
+                        && grafito.existeArista(this.ciudad2Numero(nodoAux2.ciudad), this.ciudad2Numero(nodoAux1.ciudad))) {
+                    listaCiudades += (
+                            " -"
+                            + nodoAux1.ciudad
+                            + " esta fuertemente conectada con "
+                            + nodoAux2.ciudad + "\n"
+                    );
+                }
+                nodoAux2 = nodoAux2.sig;
             }
-            nodoAux = nodoAux.sig;
+            nodoAux2 = nodo;
+            nodoAux1 = nodoAux1.sig;
         }
 
         return listaCiudades;
