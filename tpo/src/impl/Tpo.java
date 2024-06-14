@@ -75,33 +75,35 @@ public class Tpo implements TpoTDA {
 
     public void crearRuta(String ciudadOrigen, String ciudadDestino, int km) {
         grafito.agregarArista(this.ciudad2Numero(ciudadOrigen), this.ciudad2Numero(ciudadDestino), km);
+        if (grafito.pesoArista(this.ciudad2Numero(ciudadOrigen), this.ciudad2Numero(ciudadDestino)) > 499) {
+            System.out.println("(solo imprime la primer ruta con mas de 499km para mantener limpia la consola)");
 
-        System.out.println(
-                "Existe una ruta entre "
-                + ciudadOrigen
-                + " y "
-                + ciudadDestino
-                + ": "
-                + grafito.existeArista(this.ciudad2Numero(ciudadOrigen), this.ciudad2Numero(ciudadDestino))
-                + "\nEsta ruta tiene "
-                + grafito.pesoArista(this.ciudad2Numero(ciudadOrigen), this.ciudad2Numero(ciudadDestino))
-                +"KM.\n"
-        );
+            System.out.println(
+                    "Existe una ruta entre "
+                            + ciudadOrigen
+                            + " y "
+                            + ciudadDestino
+                            + ": "
+                            + grafito.existeArista(this.ciudad2Numero(ciudadOrigen), this.ciudad2Numero(ciudadDestino))
+                            + "\nEsta ruta tiene "
+                            + grafito.pesoArista(this.ciudad2Numero(ciudadOrigen), this.ciudad2Numero(ciudadDestino))
+                            +"KM.\n"
+            );
 
-        System.out.println(
-                "Existe una ruta entre "
-                        + ciudadDestino
-                        + " y "
-                        + ciudadDestino
-                        + ": "
-                        + grafito.existeArista(this.ciudad2Numero(ciudadDestino), this.ciudad2Numero(ciudadDestino))
-                        + "\n"
-        );
-
+            System.out.println(
+                    "Existe una ruta entre "
+                            + ciudadDestino
+                            + " y "
+                            + ciudadDestino
+                            + ": "
+                            + grafito.existeArista(this.ciudad2Numero(ciudadDestino), this.ciudad2Numero(ciudadDestino))
+                            + "\n"
+            );
+        }
     }
 
     public String listarCiudadesVecinas(String ciudad) {
-        String listaCiudades = "Listado de ciudades vecinas de " + ciudad + ": \n";
+        String listaCiudades = "II) Listado de ciudades vecinas de " + ciudad + ": \n";
         NodoCiudadNumero nodoAux = nodo;
 
         while (nodoAux.sig != null){
@@ -119,8 +121,19 @@ public class Tpo implements TpoTDA {
 
     }
 
-    public void listarCiudadesPredecesoras() {
+    public String listarCiudadesPredecesoras(String ciudad) {
+    //Las ciudades predecesoras serán las ciudades desde las cuales podemos llegar a (A).
+        String listaCiudades = "IV) Listado de ciudades predecesoras de " + ciudad + ": \n";
+        NodoCiudadNumero nodoAux = nodo;
 
+        while (nodoAux.sig != null){
+            if (!ciudad.equals(nodoAux.ciudad)
+                    && grafito.existeArista(this.ciudad2Numero(nodoAux.ciudad), this.ciudad2Numero(ciudad))) {
+                listaCiudades += (" -" + nodoAux.ciudad + "\n");
+            }
+            nodoAux = nodoAux.sig;
+        }
+        return listaCiudades;
     }
 
     public void listarCiudadesExtremo() {
@@ -129,7 +142,7 @@ public class Tpo implements TpoTDA {
 
     public String listarCiudadesFuertementeConectadas() {
     //Las ciudades fuertemente conectadas son las que tienen rutas de ida y vueltaentre ellas.
-        String listaCiudades = "Listado de ciudades fuertemente conectadas: \n";
+        String listaCiudades = "VI) Listado de ciudades fuertemente conectadas: \n";
         NodoCiudadNumero nodoAux1 = nodo;
         NodoCiudadNumero nodoAux2 = nodo;
 

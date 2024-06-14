@@ -10,45 +10,45 @@ import utilidades.GrafoUtils;
 public class Main {
     public static void main(String[] args) {
 
-        //creo las variables en donde van a ir almacenados mis objetos
-        GrafoUtils utilidades = new GrafoUtils();
-        Ciudad2NumeroDinamico c2n = new Ciudad2NumeroDinamico();
-        GrafoTDA grafito = new GrafoDinamico();
+////        creo las variables en donde van a ir almacenados mis objetos
+//        GrafoUtils utilidades = new GrafoUtils();
+//        Ciudad2NumeroDinamico c2n = new Ciudad2NumeroDinamico();
+//        GrafoTDA grafito = new GrafoDinamico();
         TpoTDA tpo = new Tpo();
 
-        //inicializo grafoDinamico, utilidades no lo codie todavia asi q no lo inicializo
-        grafito.inicializarGrafo();
-
-        //registro las ciudades con sus respectivas provincias en el objeto c2n cuyo tipo de dato es Ciudad2NumeroDinamico
-        //tambien al registrarse se les asigna un id unico que usaremos para representar la ciudad en el grafo
-        c2n.agregarCiudadProvincia("la plata", "buenos aires");
-        c2n.agregarCiudadProvincia("mar del plata", "buenos aires");
-        c2n.agregarCiudadProvincia("CABA", "buenos aires");
-        c2n.agregarCiudadProvincia("tandil", "buenos aires");
-
-        //agrego los vertices al grafo recuperando los id creados en el paso anterior
-        grafito.agregarVertice(c2n.ciudad2Numero("la plata"));
-        grafito.agregarVertice(c2n.ciudad2Numero("mar del plata"));
-        grafito.agregarVertice(c2n.ciudad2Numero("CABA"));
-        grafito.agregarVertice(c2n.ciudad2Numero("tandil"));
-
-        //creo una arista en mi objeto grafoDinamico llamado grafito
-        //y consigo los nros del grafo que representan mis ciudades mediante c2n
-        grafito.agregarArista(c2n.ciudad2Numero("la plata"), c2n.ciudad2Numero("CABA"), 69);
-
-        //testeo que me ande todoo
-        System.out.println("ciudad y provincia del id 2: " + c2n.numero2Ciudad(2)[0] + " - " + c2n.numero2Ciudad(2)[1]);
-
-        System.out.print("agregar Arista: ");
-        System.out.print("la plata:" + c2n.ciudad2Numero("la plata"));
-        System.out.println(" - CABA:" + c2n.ciudad2Numero("CABA"));
-
-        System.out.println("existe la arista? " + grafito.existeArista(c2n.ciudad2Numero("la plata"),c2n.ciudad2Numero("CABA")));
-        System.out.println("existe la arista opuesta? " + grafito.existeArista(c2n.ciudad2Numero("CABA"),c2n.ciudad2Numero("la plata")));
-
-        System.out.println("peso de la arista: " +grafito.pesoArista(c2n.ciudad2Numero("la plata"), c2n.ciudad2Numero("CABA")));
-
-        System.out.println();
+//        //inicializo grafoDinamico, utilidades no lo codie todavia asi q no lo inicializo
+//        grafito.inicializarGrafo();
+//
+//        //registro las ciudades con sus respectivas provincias en el objeto c2n cuyo tipo de dato es Ciudad2NumeroDinamico
+//        //tambien al registrarse se les asigna un id unico que usaremos para representar la ciudad en el grafo
+//        c2n.agregarCiudadProvincia("la plata", "buenos aires");
+//        c2n.agregarCiudadProvincia("mar del plata", "buenos aires");
+//        c2n.agregarCiudadProvincia("CABA", "buenos aires");
+//        c2n.agregarCiudadProvincia("tandil", "buenos aires");
+//
+//        //agrego los vertices al grafo recuperando los id creados en el paso anterior
+//        grafito.agregarVertice(c2n.ciudad2Numero("la plata"));
+//        grafito.agregarVertice(c2n.ciudad2Numero("mar del plata"));
+//        grafito.agregarVertice(c2n.ciudad2Numero("CABA"));
+//        grafito.agregarVertice(c2n.ciudad2Numero("tandil"));
+//
+//        //creo una arista en mi objeto grafoDinamico llamado grafito
+//        //y consigo los nros del grafo que representan mis ciudades mediante c2n
+//        grafito.agregarArista(c2n.ciudad2Numero("la plata"), c2n.ciudad2Numero("CABA"), 69);
+//
+//        //testeo que me ande todoo
+//        System.out.println("ciudad y provincia del id 2: " + c2n.numero2Ciudad(2)[0] + " - " + c2n.numero2Ciudad(2)[1]);
+//
+//        System.out.print("agregar Arista: ");
+//        System.out.print("la plata:" + c2n.ciudad2Numero("la plata"));
+//        System.out.println(" - CABA:" + c2n.ciudad2Numero("CABA"));
+//
+//        System.out.println("existe la arista? " + grafito.existeArista(c2n.ciudad2Numero("la plata"),c2n.ciudad2Numero("CABA")));
+//        System.out.println("existe la arista opuesta? " + grafito.existeArista(c2n.ciudad2Numero("CABA"),c2n.ciudad2Numero("la plata")));
+//
+//        System.out.println("peso de la arista: " +grafito.pesoArista(c2n.ciudad2Numero("la plata"), c2n.ciudad2Numero("CABA")));
+//
+//        System.out.println();
 
         //agregar y listar ciudades OK
         tpo.cargarCiudad("la plata", "buenos aires");
@@ -69,11 +69,15 @@ public class Main {
         //agregar ruta OK (borrar sout dentro del metodo)
         tpo.crearRuta("CABA", "mar del plata", 500);
         tpo.crearRuta("mar del plata", "CABA", 500);
+        tpo.crearRuta("ciudad de cordoba", "CABA", 500);
 
-        //listar ciudades vecinas a X OK
+        //II listar ciudades vecinas a X OK
         System.out.println(tpo.listarCiudadesVecinas("CABA"));
 
-        //listar ciudades fuertemente conectadas OK
+        //IV listar ciudades predecesoras de X
+        System.out.println(tpo.listarCiudadesPredecesoras("CABA"));
+
+        //VI listar ciudades fuertemente conectadas OK
         System.out.println(tpo.listarCiudadesFuertementeConectadas());
     }
 }

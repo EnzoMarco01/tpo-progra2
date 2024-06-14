@@ -18,7 +18,7 @@ public interface TpoTDA {
 
     void listarCiudadesPuente();
 
-    void listarCiudadesPredecesoras();
+    String listarCiudadesPredecesoras(String ciudad);
 
     void listarCiudadesExtremo();
 
