@@ -44,6 +44,7 @@ public class Main {
         System.out.println(" - CABA:" + c2n.ciudad2Numero("CABA"));
 
         System.out.println("existe la arista? " + grafito.existeArista(c2n.ciudad2Numero("la plata"),c2n.ciudad2Numero("CABA")));
+        System.out.println("existe la arista opuesta? " + grafito.existeArista(c2n.ciudad2Numero("CABA"),c2n.ciudad2Numero("la plata")));
 
         System.out.println("peso de la arista: " +grafito.pesoArista(c2n.ciudad2Numero("la plata"), c2n.ciudad2Numero("CABA")));
 
@@ -65,7 +66,12 @@ public class Main {
         tpo.eliminarCiudad("tandil");
         System.out.println(tpo.listarCiudades() + "(tandil eliminado)\n");
 
-        //agregar ruta
+        //agregar ruta OK (borrar sout dentro del metodo)
         tpo.crearRuta("CABA", "mar del plata", 500);
+
+        //listar ciudades vecinas a X OK
+        System.out.println(tpo.listarCiudadesVecinas("CABA"));
+
+        //listar ciudades fuertemente conectadas
     }
 }
