@@ -66,7 +66,12 @@ public class Main {
         tpo.eliminarCiudad("tandil");
         System.out.println(tpo.listarCiudades() + "(tandil eliminado)\n");
 
-        //agregar ruta
+        //agregar ruta OK (borrar sout dentro del metodo)
         tpo.crearRuta("CABA", "mar del plata", 500);
+
+        //listar ciudades vecinas a X OK
+        System.out.println(tpo.listarCiudadesVecinas("CABA"));
+
+        //listar ciudades fuertemente conectadas
     }
 }

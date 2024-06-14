@@ -75,6 +75,7 @@ public class Tpo implements TpoTDA {
 
     public void crearRuta(String ciudadOrigen, String ciudadDestino, int km) {
         grafito.agregarArista(this.ciudad2Numero(ciudadOrigen), this.ciudad2Numero(ciudadDestino), km);
+
         System.out.println(
                 "Existe una ruta entre "
                 + ciudadOrigen
@@ -84,21 +85,34 @@ public class Tpo implements TpoTDA {
                 + grafito.existeArista(this.ciudad2Numero(ciudadOrigen), this.ciudad2Numero(ciudadDestino))
                 + "\nEsta ruta tiene "
                 + grafito.pesoArista(this.ciudad2Numero(ciudadOrigen), this.ciudad2Numero(ciudadDestino))
-                +"KM."
+                +"KM.\n"
         );
+
         System.out.println(
                 "Existe una ruta entre "
                         + ciudadDestino
                         + " y "
-                        + ciudadOrigen
+                        + ciudadDestino
                         + ": "
-                        + grafito.existeArista(this.ciudad2Numero(ciudadDestino), this.ciudad2Numero(ciudadOrigen))
+                        + grafito.existeArista(this.ciudad2Numero(ciudadDestino), this.ciudad2Numero(ciudadDestino))
+                        + "\n"
         );
 
     }
 
-    public void listarCiudadesVecinas() {
+    public String listarCiudadesVecinas(String ciudad) {
+        String listaCiudades = "Listado de ciudades vecinas de " + ciudad + ": \n";
+        NodoCiudadNumero nodoAux = nodo;
 
+        while (nodoAux.sig != null){
+            if (grafito.existeArista(this.ciudad2Numero(ciudad), this.ciudad2Numero(nodoAux.ciudad))
+                    && !ciudad.equals(nodoAux.ciudad)) {
+                listaCiudades += (" -" + nodoAux.ciudad + "\n");
+            }
+            nodoAux = nodoAux.sig;
+        }
+
+        return listaCiudades;
     }
 
     public void listarCiudadesPuente() {
@@ -113,9 +127,20 @@ public class Tpo implements TpoTDA {
 
     }
 
-    public void listarCiudadesFuertementeConectadas() {
+    public String listarCiudadesFuertementeConectadas() {
     //Las ciudades fuertemente conectadas son las que tienen rutas de ida y vueltaentre ellas.
+        String listaCiudades = "Listado de ciudades fuertemente conectadas: \n";
+        NodoCiudadNumero nodoAux = nodo;
 
+        while (nodoAux.sig != null){
+            if (grafito.existeArista(this.ciudad2Numero(nodoAux.ciudad), this.ciudad2Numero(nodoAux.ciudad))
+                    && !nodoAux.ciudad.equals(nodoAux.ciudad)) {
+                listaCiudades += (" -" + nodoAux.ciudad + "\n");
+            }
+            nodoAux = nodoAux.sig;
+        }
+
+        return listaCiudades;
     }
 
     public void calcularCamino() {

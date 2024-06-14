@@ -14,7 +14,7 @@ public interface TpoTDA {
 
     void crearRuta(String ciudadOrigen, String ciudadDestino, int km);
 
-    void listarCiudadesVecinas();
+    String listarCiudadesVecinas(String ciudad);
 
     void listarCiudadesPuente();
 
@@ -22,7 +22,7 @@ public interface TpoTDA {
 
     void listarCiudadesExtremo();
 
-    void listarCiudadesFuertementeConectadas();
+    String listarCiudadesFuertementeConectadas();
 
     void calcularCamino();
 
