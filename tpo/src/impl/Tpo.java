@@ -115,50 +115,43 @@ public class Tpo implements TpoTDA {
         return listaCiudades;
     }
 
-    public void listarCiudadesPuente(String ciudad1, String ciudad2) {
-        // Encontrar ciudades puente entre ciudadA y ciudadB
-        List<String> ciudadesPuente = new ArrayList<String>();
-
-        int id1 = ciudad2Numero(ciudad1);
-        int id2 = ciudad2Numero(ciudad2);
-
-        // Recorrer todas las ciudades para verificar si son puentes
+    public void encontrarCiudadesPuentes(String ciudad1, String ciudad2){
+        // inicializa el nodo para encontrar ciudades puente entre dos ciudades
         NodoCiudadNumero aux = nodo;
-        while (aux != null) {
-            if (esCiudadPuente(ciudad1, aux.ciudad, ciudad2)) {
-                ciudadesPuente.add(aux.ciudad);
+        boolean encontrado = false;
+
+        // recorrer la lista enlazada de ciudades y verificar si alguna de ellas es una ciudad puente
+        while(aux != null){
+            String ciudad = aux.getCiudad();
+            if (esCiudadPuente(ciudad1, ciudad2, ciudad)){
+                if (!encontrado){
+                    System.out.println("Ciudades puente entre " + ciudad1 + " y " + ciudad2 + ": ");
+                    encontrado = true;
+                }
+                System.out.println(" - " + ciudad);
             }
-            aux = aux.sig;
+            aux = aux.getSig();
         }
-
-        // Construir el resultado
-        StringBuilder resultado = new StringBuilder();
-        resultado.append("Ciudades puente entre ").append(ciudad1).append(" y ").append(ciudad2).append(":\n");
-        for (String ciudadPuente : ciudadesPuente) {
-            resultado.append(", ").append(ciudadPuente).append("\n");
+        if (!encontrado){
+            System.out.println("No se encontraron ciudades puente entre " + ciudad1 + " y " + ciudad2);
         }
-        return resultado.toString();
     }
 
-    private boolean esCiudadPuente(String ciudad1, String ciudadPuente, String ciudad2) {
-        // Verificar si ciudadPuente es puente entre ciudad1 y ciudad2
+    private boolean esCiudadPuente(String ciudad1, String ciudad2, String ciudadPuente){
+        // convierte las ciudades a sus números asociados en el grafo
+        int numCiudad1 = this.ciudad2Numero(ciudad1);
+        int numCiudad2 = this.ciudad2Numero(ciudad2);
+        int numCiudadPuente = this.ciudad2Numero(ciudadPuente);
 
-        int id1 = ciudad2Numero(ciudad1);
-        int id2 = ciudad2Numero(ciudad2);
-        int idPuente = ciudad2Numero(ciudadPuente);
-
-        // Verificar si existe ruta desde ciudad1 pasando por ciudadPuente hasta ciudad2
-        boolean rutaDesde1 = grafito.existeCamino(id1, idPuente);
-        boolean rutaHasta2 = grafito.existeCamino(idPuente, id2);
-
-        return rutaDesde1 && rutaHasta2;
+        // Verifica si existe un camino desde ciudad1 a ciudadPuente y de ciudadPuente a ciudad2
+        return grafito.existeCamino(numCiudad1, numCiudadPuente) &&
+                grafito.existeCamino(numCiudadPuente, numCiudad2);
     }
-
     // Calcular distancia desde ciudad1 hasta ciudad2 pasando por ciudadPuente
     public int calcularDistanciaConCiudadPuente(String ciudad1, String ciudad2, String ciudadPuente) {
 
-        int idA = ciudad2Numero(ciudadA);
-        int idB = ciudad2Numero(ciudadB);
+        int id1 = ciudad2Numero(ciudad1);
+        int id2 = ciudad2Numero(ciudad2);
         int idPuente = ciudad2Numero(ciudadPuente);
 
         // Obtener distancias desde ciudad1 hasta Puente y desde Puente hasta ciudad2
