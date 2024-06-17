@@ -72,6 +72,15 @@ public class Main {
         //listar ciudades vecinas a X OK
         System.out.println(tpo.listarCiudadesVecinas("CABA"));
 
+        // encontrar ciudades puente y calcular distancias
+        tpo.CiudadPuente ciudadPuente = new CiudadPuente(grafo);
+
+        // Encontrar ciudades puente entre ciudad origen y ciudad destino
+        ciudadPuente.encontrarCiudadesPuente("CABA", "ciudad de cordoba");
+
+        // Calcular distancia entre ciudad origen y ciudad destino pasando por ciudad puente
+        int distancia = ciudadPuente.calcularDistanciaConCiudadPuente("CABA", "ciudad de cordoba", "mar del plata");
+        System.out.println("Distancia entre Caba y ciudad de cordoba pasando por mar del plata: " + distancia);
         //listar ciudades fuertemente conectadas
     }
 }
